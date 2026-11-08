@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>پروفایل من</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Vazirmatn', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    color: #333;
+  }
+  .container {
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    width: 100%;
+    max-width: 420px;
+    overflow: hidden;
+    animation: fadeIn 0.5s ease;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+  .header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 30px 20px;
+    text-align: center;
+    color: #fff;
+  }
+  .avatar {
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    background: #fff;
+    margin: 0 auto 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  }
+  .header h1 { font-size: 22px; margin-bottom: 4px; }
+  .header p { font-size: 14px; opacity: 0.9; }
+
+  .menu { padding: 24px 20px; display: flex; flex-direction: column; gap: 14px; }
+  .menu-btn {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 20px;
+    border: none;
+    border-radius: 16px;
+    background: #f5f6fa;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    transition: all 0.25s ease;
+    text-align: right;
+  }
+  .menu-btn:hover, .menu-btn:active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    transform: translateX(-4px);
+    box-shadow: 0 8px 20px rgba(102,126,234,0.4);
+  }
+  .menu-btn .icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  .page { display: none; padding: 24px 20px; animation: fadeIn 0.3s ease; }
+  .page.active { display: block; }
+
+  .back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    color: #667eea;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 18px;
+    padding: 6px 0;
+  }
+
+  .info-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: #f5f6fa;
+    border-radius: 14px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: #333;
+    transition: all 0.2s;
+  }
+  .info-item:hover { background: #eef0f8; transform: translateX(-3px); }
+  .info-item .ico {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+    color: #fff;
+  }
+  .ico.tel { background: #34b7f1; }
+  .ico.insta { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+  .ico.whats { background: #25D366; }
+  .ico.tele { background: #0088cc; }
+  .ico.addr { background: #ff6b6b; }
+
+  .info-text { display: flex; flex-direction: column; }
+  .info-text .label { font-size: 12px; color: #888; }
+  .info-text .value { font-size: 15px; font-weight: 600; direction: ltr; text-align: right; }
+
+  .product-grid { display: flex; flex-direction: column; gap: 16px; }
+  .product-card {
+    background: #f5f6fa;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.2s;
+  }
+  .product-card:hover { transform: translateY(-3px); }
+  .product-card img { width: 100%; height: 180px; object-fit: cover; display: block; }
+  .product-info { padding: 14px 16px; }
+  .product-info h3 { font-size: 16px; margin-bottom: 6px; }
+  .product-info p { font-size: 13px; color: #666; line-height: 1.6; }
+  .product-info .price { margin-top: 8px; font-weight: 700; color: #667eea; font-size: 15px; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <div class="avatar">🏪</div>
+    <h1 id="shopName">گالری نقاشی عسل</h1>
+    <p id="shopSlogan">از نقش بستن در ذهن تا نقش بستن  بر کاغذ</p>
+  </div>
+
+  <!-- منوی اصلی -->
+  <div class="menu" id="mainMenu">
+    <button class="menu-btn" onclick="showPage('infoPage')">
+      <span class="icon">📋</span>
+      اطلاعات تماس و آدرس
+    </button>
+    <button class="menu-btn" onclick="showPage('productPage')">
+      <span class="icon">🛍️</span>
+      نمونه محصولات
+    </button>
+  </div>
+
+  <!-- صفحه اطلاعات -->
+  <div class="page" id="infoPage">
+    <button class="back-btn" onclick="showPage('mainMenu')">→ بازگشت</button>
+
+    <a class="info-item" href="tel:+989121234567">
+      <span class="ico tel">📞</span>
+      <span class="info-text">
+        <span class="label">تماس</span>
+        <span class="value">۰۹۰۵۲۵۴۵۲۰۳</span>
+      </span>
+    </a>
+
+    <a class="info-item" href="https://instagram.com/yourpage" target="_blank">
+      <span class="ico insta">📸</span>
+      <span class="info-text">
+        <span class="label">اینستاگرام</span>
+        <span class="value">@asali_naghashi</span>
+      </span>
+    </a>
+
+    <a class="info-item" href="https://wa.me/989905594929" target="_blank">
+      <span class="ico whats">💬</span>
+      <span class="info-text">
+        <span class="label">واتساپ</span>
+        <span class="value">۰۹۹۰۵۵۹۴۹۲۹</span>
+      </span>
+    </a>
+
+    <a class="info-item" href="https://t.me/yourusername" target="_blank">
+      <span class="ico tele">✈️</span>
+      <span class="info-text">
+        <span class="label">تلگرام</span>
+        <span class="value">@Asalsina5</span>
+      </span>
+    </a>
+
+    <a class="info-item" href="https://maps.google.com/?q=آدرس+شما" target="_blank">
+      <span class="ico addr">📍</span>
+      <span class="info-text">
+        <span class="label">آدرس</span>
+        <span class="value">تهران، خیابان ...</span>
+      </span>
+    </a>
+  </div>
+
+  <!-- صفحه محصولات -->
+  <div class="page" id="productPage">
+    <button class="back-btn" onclick="showPage('mainMenu')">→ بازگشت</button>
+
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="https://via.placeholder.com/400x180?text=Product+1" alt="محصول ۱">
+        <div class="product-info">
+          <h3>نام محصول اول</h3>
+          <p>توضیح کوتاه درباره این محصول و ویژگی‌های آن.</p>
+          <div class="price">۲۵۰,۰۰۰ تومان</div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img src="https://via.placeholder.com/400x180?text=Product+2" alt="محصول ۲">
+        <div class="product-info">
+          <h3>نام محصول دوم</h3>
+          <p>توضیح کوتاه درباره این محصول و ویژگی‌های آن.</p>
+          <div class="price">۱۸۰,۰۰۰ تومان</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function showPage(id) {
+    document.getElementById('mainMenu').style.display = 'none';
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    if (id === 'mainMenu') {
+      document.getElementById('mainMenu').style.display = 'flex';
+    }
+  }
+</script>
+</body>
+</html>
